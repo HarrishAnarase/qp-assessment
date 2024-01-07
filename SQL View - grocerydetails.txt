@@ -1,0 +1,15 @@
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `qp-assessment`.`grocerydetails` AS
+    SELECT 
+        `g`.`id` AS `id`,
+        `g`.`name` AS `name`,
+        `g`.`price` AS `price`,
+        `ud`.`name` AS `user`,
+        `gb`.`payment` AS `payment`
+    FROM
+        ((`qp-assessment`.`grocery` `g`
+        LEFT JOIN `qp-assessment`.`grocery_booking` `gb` ON ((`g`.`id` = `gb`.`grocery_id`)))
+        LEFT JOIN `qp-assessment`.`user_details` `ud` ON ((`gb`.`user_id` = `ud`.`id`)))
